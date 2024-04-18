@@ -49,9 +49,9 @@ def extract_text(documents):
 
 # Helper function to get pdf and docx summary
 def get_summary(documents):
-  embeddings = OpenAIEmbeddings(openai_api_key = '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')
+  embeddings = OpenAIEmbeddings(openai_api_key = <open_ai_key>)
   vectorstore = Chroma.from_documents(documents, embeddings)
-  retrievalQA = RetrievalQA.from_llm(llm=OpenAI(openai_api_key="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"),
+  retrievalQA = RetrievalQA.from_llm(llm=OpenAI(openai_api_key=<open_ai_key>),
                                   retriever=vectorstore.as_retriever())
 
   text = "Understand the text and give summary in English language."
@@ -93,7 +93,7 @@ def main():
     data_file = st.file_uploader("Upload CSV",type=['csv'])
     if st.button("Summary"):
       if data_file is not None:
-        llm = OpenAI(openai_api_key="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")
+        llm = OpenAI(openai_api_key=<open_ai_key>)
         agent = create_csv_agent(llm, data_file)
         english_summary = agent.run("Understand the dataset and give the summary of what the data is about in English language.")
         prompt = f"""Convert text which is delimited by triple backticks ```{english_summary}``` to french language"""
